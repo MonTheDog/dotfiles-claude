@@ -1,9 +1,3 @@
 #!/bin/bash
 # Altair — Claude Code with Altair skin and identity
-
-clear
-~/.claude/skins/engine/show-banner.sh altair
-sleep 1.5
-clear
-
-ALTAIR_SKIP_HOOK_BANNER=1 CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"
+CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"
