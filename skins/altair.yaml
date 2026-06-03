@@ -63,6 +63,9 @@ branding:
     \033[38;2;255;0;180m   ██║  ██║███████╗    ██║   ██║  ██║██║██║  ██║\033[0m
     \033[2;38;2;180;0;220m          ✦ ✧  C E L E S T I A L  A I  ✧ ✦\033[0m
 
+
+
+
   welcome: "✦ Altair online. Ready to assist and explain. ✦"
   goodbye: "✦ Altair signing off. Until next time. ✦"
   prompt_prefix: "✦"
