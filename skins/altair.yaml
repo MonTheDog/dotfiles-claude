@@ -72,7 +72,7 @@ branding:
 
 tools:
   sounds: true
-  prefix: "▏"
+  prefix: "✦"
   events:
     file_written: { sound: "Pop", icon: "✦" }
     command_run: { sound: "Morse", icon: "◎" }
