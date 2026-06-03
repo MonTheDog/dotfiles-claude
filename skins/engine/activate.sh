@@ -141,5 +141,5 @@ _print_banner() {
 }
 
 if [[ -n "${TTY:-}" ]]; then
-  _print_banner > "$TTY"
+  { printf '\033[2J\033[H'; _print_banner; } > "$TTY"
 fi
