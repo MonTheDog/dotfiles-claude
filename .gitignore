@@ -33,3 +33,10 @@ skins/engine/current
 
 # Git
 *.backup
+
+# Daemon and background job state
+daemon.lock
+daemon.log
+daemon.status.json
+daemon/
+jobs/
