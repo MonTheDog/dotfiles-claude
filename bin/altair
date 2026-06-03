@@ -1,11 +1,9 @@
 #!/bin/bash
 # Altair — Claude Code with Altair skin and identity
 
-# Show Altair banner on the main screen buffer
 clear
 ~/.claude/skins/engine/show-banner.sh altair
+sleep 1.5
+clear
 
-# CLAUDE_CODE_DISABLE_FLICKER=1 forces Claude Code to use the alternate screen
-# buffer (like vim/less), so its TUI lives in a separate layer.
-# The main screen (with the Altair banner) is restored when Claude exits.
-ALTAIR_SKIP_HOOK_BANNER=1 CLAUDE_SKIN_OVERRIDE=altair CLAUDE_CODE_DISABLE_FLICKER=1 exec claude "$@"
+ALTAIR_SKIP_HOOK_BANNER=1 CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"
