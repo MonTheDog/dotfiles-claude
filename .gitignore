@@ -28,5 +28,8 @@ mcp-needs-auth-cache.json
 # Plugins — reinstall per machine
 plugins/
 
+# Active skin session state (machine-local, set by /skin command)
+skins/engine/current
+
 # Git
 *.backup
