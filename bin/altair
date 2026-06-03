@@ -1,0 +1,3 @@
+#!/bin/bash
+# Altair — Claude Code with Altair skin and identity
+CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"

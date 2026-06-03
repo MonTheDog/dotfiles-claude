@@ -48,9 +48,11 @@ _resolve_tty() {
 
 skin_name="${1:-}"
 
-# If no name given, read from config
+# If no name given, check env override then config
 if [[ -z "$skin_name" ]]; then
-  if [[ -f "$ENGINE_DIR/config.yaml" ]]; then
+  if [[ -n "${CLAUDE_SKIN_OVERRIDE:-}" ]]; then
+    skin_name="$CLAUDE_SKIN_OVERRIDE"
+  elif [[ -f "$ENGINE_DIR/config.yaml" ]]; then
     skin_name=$(get_yaml_value "$ENGINE_DIR/config.yaml" "default_skin" 2>/dev/null || echo "default")
     [[ -z "$skin_name" ]] && skin_name="default"
   else

@@ -1,0 +1,55 @@
+name: altair
+description: "Altair — deep space stellar theme, indigo-to-gold gradient, professional AI assistant identity"
+
+terminal:
+  background: "#080A14"
+  foreground: "#B8C4E8"
+  cursor: "#FFD700"
+  palette:
+    black: "#080A14"
+    red: "#FF6B6B"
+    green: "#69F0AE"
+    yellow: "#FFD700"
+    blue: "#5B7FD4"
+    magenta: "#A78BFA"
+    cyan: "#93C5FD"
+    white: "#E2E8F0"
+
+statusline:
+  accent: "#FFD700"
+  dim: "#1E2240"
+  bar_fill: "#5B7FD4"
+  bar_empty: "#080A14"
+  icon: "✦"
+
+branding:
+  hero: |
+    \033[38;2;60;50;120m⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡄⠀⠀⠀⠀⠀⠀⠀⠀\033[0m
+    \033[38;2;80;65;160m⠀⠀⠀⠀⠀⠀⢠⣤⣾⣿⣿⣷⣤⡄⠀⠀⠀⠀⠀\033[0m
+    \033[38;2;110;90;200m⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀\033[0m
+    \033[38;2;150;120;230m⠠⣤⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣤⠄\033[0m
+    \033[38;2;200;165;50m⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀\033[0m
+    \033[38;2;220;185;30m⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀\033[0m
+    \033[38;2;240;205;10m⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\033[0m
+    \033[38;2;255;215;0m⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\033[0m
+    \033[38;2;255;215;0m⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠿⠇⠀⠀⠀⠀⠀⠀⠀⠀\033[0m
+  banner: |
+    \033[38;2;40;30;100m    █████╗ ██╗      ████████╗ █████╗ ██╗██████╗ \033[0m
+    \033[38;2;65;52;148m   ██╔══██╗██║      ╚══██╔══╝██╔══██╗██║██╔══██╗\033[0m
+    \033[38;2;95;78;190m   ███████║██║         ██║   ███████║██║██████╔╝ \033[0m
+    \033[38;2;140;115;220m   ██╔══██║██║         ██║   ██╔══██║██║██╔══██╗\033[0m
+    \033[38;2;200;165;50m   ██║  ██║███████╗    ██║   ██║  ██║██║██║  ██║\033[0m
+    \033[38;2;255;215;0m   ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝\033[0m
+    \033[2;38;2;180;150;40m              ✦  A I  A S S I S T A N T  ✦\033[0m
+  welcome: "Altair online. How can I assist?"
+  goodbye: "Altair signing off."
+  prompt_prefix: "✦"
+
+tools:
+  sounds: true
+  prefix: "▏"
+  events:
+    file_written: { sound: "Pop", icon: "✦" }
+    command_run: { sound: "Morse", icon: "◎" }
+    error: { sound: "Basso", icon: "⚠" }
+    search: { sound: "Tink", icon: "◈" }
