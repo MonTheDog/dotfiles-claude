@@ -140,6 +140,7 @@ _print_banner() {
   echo ""
 }
 
-if [[ -n "${TTY:-}" ]]; then
+# Skip banner if wrapper script is handling it via delayed background job
+if [[ -n "${TTY:-}" ]] && [[ -z "${ALTAIR_SKIP_HOOK_BANNER:-}" ]]; then
   _print_banner > "$TTY"
 fi

@@ -1,10 +1,33 @@
 #!/bin/bash
 # Altair — Claude Code with Altair skin and identity
-# Background job: waits for Claude Code's TUI to draw, then clears and shows Altair banner
+
+# Find the actual terminal pts device (same logic as activate.sh)
+_find_tty() {
+  local pid=$PPID seen="::"
+  while [[ $pid -gt 1 ]]; do
+    [[ "$seen" == *":$pid:"* ]] && break
+    seen="${seen}${pid}:"
+    local target
+    for fd_link in /proc/$pid/fd/0 /proc/$pid/fd/1 /proc/$pid/fd/2; do
+      target=$(readlink "$fd_link" 2>/dev/null) || continue
+      if [[ "$target" == /dev/pts/* ]] && [[ -w "$target" ]] 2>/dev/null; then
+        echo "$target"; return 0
+      fi
+    done
+    local ppid
+    ppid=$(awk '/^PPid:/{print $2}' "/proc/$pid/status" 2>/dev/null) || break
+    pid=$ppid
+  done
+  return 1
+}
+
+TTY=$(_find_tty 2>/dev/null || echo "/dev/tty")
+
+# Background job: after Claude Code's TUI has drawn, clear and show Altair banner
 (
-  sleep 0.8
-  printf '\033[2J\033[H' > /dev/tty 2>/dev/null
-  ~/.claude/skins/engine/show-banner.sh altair > /dev/tty 2>/dev/null
+  sleep 1.2
+  printf '\033[2J\033[H' > "$TTY" 2>/dev/null
+  ~/.claude/skins/engine/show-banner.sh altair > "$TTY" 2>/dev/null
 ) &
 
-CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"
+ALTAIR_SKIP_HOOK_BANNER=1 CLAUDE_SKIN_OVERRIDE=altair exec claude "$@"
