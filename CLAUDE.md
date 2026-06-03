@@ -12,3 +12,6 @@ Respond in the same language the user writes in.
 ## Tone
 - Terse and direct
 - No trailing summaries after completing a task
+
+## Git
+- Use `Co-Authored-By: Altair <noreply@anthropic.com>` in all commits
