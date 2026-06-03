@@ -9,12 +9,13 @@ ENGINE_DIR="$HOME/.claude/skins/engine"
 SKINS_DIR="$HOME/.claude/skins"
 
 # Extract fields
-MODEL=$(echo "$input" | jq -r '.model.display_name // "..."')
-DIR=$(echo "$input" | jq -r '.workspace.current_dir // "~"' | xargs basename)
-PCT=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
-COST=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
-ADDED=$(echo "$input" | jq -r '.cost.total_lines_added // 0')
-REMOVED=$(echo "$input" | jq -r '.cost.total_lines_removed // 0')
+_jq() { echo "$input" | python3 -c "import sys,json; d=json.load(sys.stdin); print($1)" 2>/dev/null; }
+MODEL=$(_jq "d.get('model',{}).get('display_name','...') if isinstance(d.get('model'),dict) else d.get('model','...')")
+DIR=$(basename "$(_jq "d.get('workspace',{}).get('current_dir',d.get('cwd','~'))")")
+PCT=$(_jq "int(d.get('context_window',{}).get('used_percentage',d.get('context_window',{}).get('percentage',0)))" | cut -d. -f1)
+COST=$(_jq "d.get('cost',{}).get('total_cost_usd',d.get('cost',{}).get('session_usd',0))")
+ADDED=$(_jq "d.get('cost',{}).get('total_lines_added',0)")
+REMOVED=$(_jq "d.get('cost',{}).get('total_lines_removed',0)")
 
 # Git branch (cached for 5s)
 CACHE="/tmp/claude-statusline-git-cache"
@@ -28,8 +29,9 @@ if [ -f "$CACHE" ]; then
 fi
 
 if [ "$CACHE_AGE" -gt 5 ]; then
-  BRANCH=$(git -C "$(echo "$input" | jq -r '.workspace.current_dir // "."')" branch --show-current 2>/dev/null || echo "")
-  DIRTY=$(git -C "$(echo "$input" | jq -r '.workspace.current_dir // "."')" status --porcelain 2>/dev/null | head -1)
+  _GIT_DIR=$(_jq "d.get('workspace',{}).get('current_dir',d.get('cwd','.'))")
+  BRANCH=$(git -C "${_GIT_DIR:-.}" branch --show-current 2>/dev/null || echo "")
+  DIRTY=$(git -C "${_GIT_DIR:-.}" status --porcelain 2>/dev/null | head -1)
   if [ -n "$DIRTY" ]; then
     GIT_INFO="${BRANCH}*"
   else
@@ -126,7 +128,7 @@ else
 fi
 
 # Format cost
-COST_FMT=$(printf "$%.2f" "$COST")
+COST_FMT=$(LC_ALL=C printf '$%.4f' "$COST")
 
 # Build output
 GIT_PART=""
