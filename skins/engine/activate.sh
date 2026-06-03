@@ -138,6 +138,7 @@ _print_banner() {
   [[ -n "$banner" ]] && echo -e "$banner" && echo ""
   [[ -n "$welcome" ]] && echo -e "\033[2m$welcome\033[0m"
   echo ""
+  echo ""
 }
 
 if [[ -n "${TTY:-}" ]]; then
