@@ -1,0 +1,32 @@
+# Auth & credentials — never commit
+.credentials.json
+
+# Conversation & session state
+history.jsonl
+sessions/
+session-env/
+shell-snapshots/
+
+# Per-project memory & state
+projects/
+
+# Caches & transient data
+cache/
+paste-cache/
+file-history/
+backups/
+plans/
+output-styles/
+
+# Internal SDK state
+telemetry/
+stats-cache.json
+policy-limits.json
+mcp-needs-auth-cache.json
+.last-cleanup
+
+# Plugins — reinstall per machine
+plugins/
+
+# Git
+*.backup

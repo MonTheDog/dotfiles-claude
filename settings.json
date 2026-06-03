@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/monno/.claude/skins/engine/activate.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/monno/.claude/skins/engine/deactivate.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/monno/.claude/skins/engine/skin-tool-hook.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/home/monno/.claude/skins/engine/statusline.sh"
+  }
+}
